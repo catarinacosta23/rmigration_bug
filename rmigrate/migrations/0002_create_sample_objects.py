@@ -5,8 +5,10 @@ def up(apps, schema_editor):
     A = apps.get_model('rmigrate', 'A')
     User = apps.get_model('rmigrate', 'User')
 
-    a = A(user=User.objects.first())
-    a.save()
+    user = User.objects.first()
+    if user:
+        a = A(user=user)
+        a.save()
 
 def down(apps, schema_editor):
     A = apps.get_model('rmigrate', 'A')
